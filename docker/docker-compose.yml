@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  go:
+    build:
+      context: .
+      dockerfile: ./go/Dockerfile
+    image: echo-server
+    container_name: echo-server
+    networks:
+      - echo
+
+networks:
+  echo:
+    driver: bridge
