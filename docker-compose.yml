@@ -3,16 +3,16 @@ version: '3'
 services:
   go:
     build:
-      context: .
-      dockerfile: ./go/Dockerfile
+      context: docker
+      dockerfile: go/Dockerfile
     image: echo-server
     container_name: echo-server
     networks:
       - echo
   nginx:
     build:
-      context: .
-      dockerfile: ./nginx/Dockerfile
+      context: docker
+      dockerfile: nginx/Dockerfile
     image: echo-nginx
     container_name: echo-nginx
     ports:

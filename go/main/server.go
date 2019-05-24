@@ -1,9 +1,9 @@
 package main
 
 import (
-"net/http"
+	"net/http"
 
-"github.com/labstack/echo"
+	"github.com/labstack/echo"
 )
 
 func getUser(c echo.Context) error {
@@ -16,7 +16,7 @@ func show(c echo.Context) error {
 	// Get team and member from the query string
 	team := c.QueryParam("team")
 	member := c.QueryParam("member")
-	return c.String(http.StatusOK, "team:" + team + ", member:" + member)
+	return c.String(http.StatusOK, "team:"+team+", member:"+member)
 }
 
 func main() {
