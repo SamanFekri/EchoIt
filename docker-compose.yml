@@ -1,4 +1,4 @@
-version: '3'
+version: '2'
 
 services:
   go:
@@ -9,8 +9,7 @@ services:
     container_name: echo-server
     networks:
       - echo
-    mem_limit: 128m
-
+    mem_swappiness: 100
   nginx:
     build:
       context: .
