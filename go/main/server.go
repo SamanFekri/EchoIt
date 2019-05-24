@@ -1,31 +1,32 @@
 package main
 
 import (
-	"net/http"
-
+	"encoding/json"
+	"fmt"
 	"github.com/labstack/echo"
+	"net/http"
 )
 
-func getUser(c echo.Context) error {
-	// User ID from path `users/:id`
-	id := c.Param("id")
-	return c.String(http.StatusOK, id)
+func Up(c echo.Context) error {
+	return c.HTML(http.StatusOK, "The <i> SKings </i> <b> Echo </b> server is <b> Up </b> ")
 }
 
-func show(c echo.Context) error {
-	// Get team and member from the query string
-	team := c.QueryParam("team")
-	member := c.QueryParam("member")
-	return c.String(http.StatusOK, "team:"+team+", member:"+member)
+func EchoPost(c echo.Context) error {
+	fp, err := c.FormParams()
+	fmt.Println(c)
+	if err != nil {
+		return c.JSON(http.StatusBadRequest, nil)
+	}
+	fmt.Println(fp)
+	j, err := json.Marshal(fp)
+	if err != nil {
+		return c.JSON(http.StatusBadRequest, nil)
+	}
+	return c.JSONBlob(http.StatusOK, j)
 }
-
 func main() {
 	e := echo.New()
-	e.GET("/", func(c echo.Context) error {
-		return c.String(http.StatusOK, "Hello, World!")
-	})
-	e.GET("/users/:id", getUser)
-	e.GET("/show", show)
+	e.GET("/", Up)
+	e.POST("/", EchoPost)
 	e.Logger.Fatal(e.Start(":1323"))
-
 }
