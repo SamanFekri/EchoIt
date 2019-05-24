@@ -9,6 +9,16 @@ services:
     container_name: echo-server
     networks:
       - echo
+  nginx:
+    build:
+      context: .
+      dockerfile: ./nginx/Dockerfile
+    image: echo-nginx
+    container_name: echo-nginx
+    ports:
+      - 4000:80
+    networks:
+      - echo
 
 networks:
   echo:
