@@ -1,4 +1,4 @@
-version: '2'
+version: '3'
 
 services:
   go:
@@ -9,7 +9,7 @@ services:
     container_name: echo-server
     networks:
       - echo
-    mem_swappiness: 100
+
   nginx:
     build:
       context: .
